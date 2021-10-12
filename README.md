@@ -7,7 +7,7 @@
 </p>
 
 
----
+
 
 ## 🚀 Tecnologias
 
@@ -17,13 +17,13 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - NodeJS
 - Express
 
----
+
 
 ## 💻 Projeto
 
 Esse projeto foi construido para servir de apoio no estudo de consumo de APIs REST
 
----
+
 
 ## Como utilizar?
 
@@ -33,7 +33,7 @@ Esse projeto foi construido para servir de apoio no estudo de consumo de APIs RE
 
 3. E pra iniciar a aplicação, rode o comando `npm start` 
 
----
+
 
 ## :memo: Licença
 
