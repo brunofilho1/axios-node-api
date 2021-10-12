@@ -17,6 +17,18 @@ let users = {
 
 app.route('/api').get((req, res) => res.send(users))
 
+app.route('/api/:id').get((req, res) => {
+  const userId = req.params.id
+
+  const user = users.data.find(user => Number(user.id) === Number(userId))
+
+  if (!user) {
+    return res.send('User nor found!')
+  }
+
+  res.send(user)
+})
+
 app.route('/api').post((req, res) => {
     const lastId = users.data[users.data.length - 1]?.id || 0;
     users.data.push({
