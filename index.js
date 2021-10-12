@@ -2,7 +2,7 @@ const express = require('express')
 
 const app = express()
 
-app.listen(5500)
+app.listen(5500, () => console.log('API rodando na porta 5500'))
 
 app.use(express.json())
 
