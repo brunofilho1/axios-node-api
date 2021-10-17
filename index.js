@@ -10,7 +10,7 @@ let users = {
     data: [{
         id: 1,
         name: "Jakeliny Gracielly",
-        avatar: "https://github.com/maykbrito.png",
+        avatar: "https://avatars.githubusercontent.com/u/17316392?v=4",
         city: "São Paulo"
     }]
 }
