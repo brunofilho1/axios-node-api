@@ -9,15 +9,17 @@ app.use(cors())
 
 app.use(express.json())
 
-let users =  [{
-        id: 1,
-        name: "Jakeliny Gracielly",
-        avatar: "https://avatars.githubusercontent.com/u/17316392?v=4",
-        city: "São Paulo"
-    }]
+let users = [{
+  id: 1,
+  name: "Jakeliny Gracielly",
+  avatar: "https://avatars.githubusercontent.com/u/17316392?v=4",
+  city: "São Paulo"
+}]
 
 
-app.route('/api').get((req, res) => res.send(users))
+app.route('/api').get((req, res) => res.json({
+  users
+}))
 
 app.route('/api/:id').get((req, res) => {
   const userId = req.params.id
@@ -25,53 +27,53 @@ app.route('/api/:id').get((req, res) => {
   const user = users.find(user => Number(user.id) === Number(userId))
 
   if (!user) {
-    return res.send('User nor found!')
+    return res.json('User nor found!')
   }
 
-  res.send(user)
+  res.json(user)
 })
 
 app.route('/api').post((req, res) => {
-    const lastId = users[users.length - 1]?.id || 0;
-    users.push({
-        id: lastId + 1,
-        name: req.body.name,
-        avatar: req.body.avatar,
-        city: req.body.city
-    })
-    res.send('Saved user')
+  const lastId = users[users.length - 1].id
+  users.push({
+    id: lastId + 1,
+    name: req.body.name,
+    avatar: req.body.avatar,
+    city: req.body.city
+  })
+  res.json('Saved user')
 })
 
 app.route('/api/:id').put((req, res) => {
-    const userId = req.params.id
+  const userId = req.params.id
 
-    const user = users.find(user => Number(user.id) === Number(userId))
+  const user = users.find(user => Number(user.id) === Number(userId))
 
-    if (!user) {
-      return res.send('User nor found!')
+  if (!user) {
+    return res.json('User nor found!')
+  }
+
+  const updatedUser = {
+    ...user,
+    name: req.body.name,
+    avatar: req.body.avatar,
+    city: req.body.city
+  }
+
+  users = users.map(user => {
+    if (Number(user.id) === Number(userId)) {
+      user = updatedUser
     }
+    return user
+  })
 
-    const updatedUser = {
-        ...user, 
-        name: req.body.name,
-        avatar: req.body.avatar,
-        city: req.body.city
-      }
-
-      users = users.map(user => {
-        if(Number(user.id) === Number(userId)) {
-          user = updatedUser
-        }        
-        return user
-      })
-
-      res.send("Updated user")
+  res.json("Updated user")
 })
 
 app.route('/api/:id').delete((req, res) => {
-    const userId = req.params.id
+  const userId = req.params.id
 
-    users = users.filter(user => Number(user.id) !== Number(userId))
+  users = users.filter(user => Number(user.id) !== Number(userId))
 
-    res.send('Deleted User')
+  res.json('Deleted User')
 })
